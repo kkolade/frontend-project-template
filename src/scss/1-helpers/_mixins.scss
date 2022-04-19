@@ -1,3 +1,6 @@
+@use "variables" as v;
+@use "functions" as f;
+
 @mixin clearFix {
   &::after {
     content: "";
@@ -11,4 +14,35 @@
 @mixin google-font($font) {
   $font: unquote($font);
   @import url(https://fonts.google.com/css?family=#{$font});
+}
+
+//-----BREAK POINTS-----
+@mixin breakpoint-up($size) {
+  @media screen and (min-width: map-get(v.$breakpoint-map-up, $size)) {
+    @content;
+  }
+}
+
+@mixin breakpoint-down($size) {
+  @media screen and (max-width: map-get(v.$breakpoint-map-down, $size)) {
+    @content;
+  }
+}
+
+@mixin button(
+  $text-color: v.$color-white,
+  $background-color: f.color(primary)
+) {
+  display: inline-block;
+  width: fit-content;
+  padding: v.$sp-1 v.$sp-2;
+  border-radius: v.$sp-3 * 3;
+  color: $text-color;
+  background-color: $background-color;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: lighten($color: $background-color, $amount: 10%);
+  }
 }

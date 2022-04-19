@@ -1,0 +1,8 @@
+@use "1-helpers/1-helpers" as h;
+
+.btn {
+  @include h.button;
+}
+
+.btn-primary {
+}
